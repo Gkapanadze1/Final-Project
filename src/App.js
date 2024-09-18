@@ -1,10 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <div>
-      <h1 className='text-5xl text-blue-600'>hello</h1>
+      <Routes>
+
+      </Routes>
     </div>
   );
 }
