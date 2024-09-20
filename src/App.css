@@ -10,3 +10,10 @@
 .secondary{
     background-color: #0E1422;
 }
+
+.image{   
+    background-image:url('../public/images/Search_icon.png');
+    background-repeat:no-repeat;
+    background-position:left;
+    padding-left:25px;
+}

@@ -1,12 +1,16 @@
 import React from "react";
 import Discountbanner from '../components/Discountbanner'
+import Header from '../components/Header'
 
 
 const Homepage = () => {
 
 
     return(
-        <Discountbanner />
+        <div>
+            <Discountbanner />
+            <Header />
+        </div>
     )
 }
 
