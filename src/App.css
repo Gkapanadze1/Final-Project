@@ -17,3 +17,12 @@
     background-position:left;
     padding-left:25px;
 }
+
+.text-secondary{
+    color: #202533;
+}
+
+.max-h-100{
+    max-height: 450px;
+    height: 385px;
+}

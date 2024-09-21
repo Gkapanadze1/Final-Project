@@ -6,7 +6,7 @@ const Header = () => {
         <header className="flex items-center justify-around py-5">
             <div className="flex items-center gap-2 font-semibold text-xl">
               <a href="/"><img src="/images/Logomark.png" alt="logo"/></a>
-              <h2>Ecommerce</h2>
+              <h2 className="font-bold text-secondary">Ecommerce</h2>
             </div>
 
             <div className="flex items-center gap-9 text-gray-500 text-base font-medium">
