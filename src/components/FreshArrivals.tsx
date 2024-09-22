@@ -23,7 +23,7 @@ const FreshArrivals = () => {
 
             <div className="flex items-center justify-around mt-20">
 
-                <div className="flex flex-col max-w-80 gap-3">
+                <div className="flex flex-col max-w-80 gap-3 px-5">
 
                     <img src="images/Icon_Box2.png" alt="Icon_Box" className="h-12 w-12" />
 

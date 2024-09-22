@@ -1,7 +1,8 @@
 import React from "react";
-import Discountbanner from '../components/Discountbanner';
+import DiscountBanner from '../components/DiscountBanner';
 import Header from '../components/Header';
 import FreshArrivals from "../components/FreshArrivals";
+import BestSeller from "../components/BestSeller";
 
 
 const Homepage = () => {
@@ -9,9 +10,10 @@ const Homepage = () => {
 
     return(
         <div>
-            <Discountbanner />
+            <DiscountBanner />
             <Header />
             <FreshArrivals />
+            <BestSeller />
         </div>
     )
 }

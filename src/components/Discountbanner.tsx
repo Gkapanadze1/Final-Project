@@ -1,6 +1,6 @@
 import React from "react";
 
-const Discountbanner = () => {
+const DiscountBanner = () => {
     return(
         <div className="flex gap-3 secondary text-white text-center justify-center p-3">
             <span>Get 25% OFF on your first order.</span>
@@ -9,4 +9,4 @@ const Discountbanner = () => {
     )
 }
 
-export default Discountbanner
+export default DiscountBanner
