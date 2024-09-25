@@ -1,4 +1,4 @@
-export interface TshirtsInterface {
+export interface ClothesInterface {
     id: number,
     name: string,
     price: string,

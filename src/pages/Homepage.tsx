@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import FreshArrivals from "../components/FreshArrivals";
 import BestSeller from "../components/BestSeller";
 import StartBrowsing from "../components/StartBrowsing";
+import MoreClothes from "../components/MoreClothes";
 
 
 const Homepage = () => {
@@ -16,6 +17,7 @@ const Homepage = () => {
             <FreshArrivals />
             <BestSeller />
             <StartBrowsing />
+            <MoreClothes />
         </div>
     )
 }
