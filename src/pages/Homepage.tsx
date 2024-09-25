@@ -3,6 +3,7 @@ import DiscountBanner from '../components/DiscountBanner';
 import Header from '../components/Header';
 import FreshArrivals from "../components/FreshArrivals";
 import BestSeller from "../components/BestSeller";
+import StartBrowsing from "../components/StartBrowsing";
 
 
 const Homepage = () => {
@@ -14,6 +15,7 @@ const Homepage = () => {
             <Header />
             <FreshArrivals />
             <BestSeller />
+            <StartBrowsing />
         </div>
     )
 }
