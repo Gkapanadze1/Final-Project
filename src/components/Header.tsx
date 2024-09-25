@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
 
     return(
-        <header className="flex items-center justify-around py-5">
+        <header className="flex items-center justify-between py-5 max-w-7xl m-auto">
             <div className="flex items-center gap-2 font-semibold text-xl">
               <a href="/"><img src="/images/Logomark.png" alt="logo"/></a>
               <h2 className="font-bold text-secondary">Ecommerce</h2>
