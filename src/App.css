@@ -26,3 +26,7 @@
     max-height: 450px;
     height: 385px;
 }
+
+.footer-border{
+    border-top: solid 1px gray;
+}

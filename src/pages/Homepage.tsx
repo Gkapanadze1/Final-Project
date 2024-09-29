@@ -5,6 +5,7 @@ import FreshArrivals from "../components/FreshArrivals";
 import BestSeller from "../components/BestSeller";
 import StartBrowsing from "../components/StartBrowsing";
 import MoreClothes from "../components/MoreClothes";
+import Footer from "../components/Footer";
 
 
 const Homepage = () => {
@@ -18,6 +19,7 @@ const Homepage = () => {
             <BestSeller />
             <StartBrowsing />
             <MoreClothes />
+            <Footer />
         </div>
     )
 }
