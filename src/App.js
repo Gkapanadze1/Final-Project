@@ -2,18 +2,22 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
-import Homepage from './pages/Homepage'
+import HomePage from './pages/HomePage'
+import CategoriesPage from './pages/CategoriesPage'
+import ItemPage from './pages/ItemPage'
 
 function App() {
   return (
     <Provider store={store}>
       <div>
-        
-        <Homepage />
 
         <Routes>
 
+        <Route path="/" element={<HomePage />} />
+        <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/items/:id" element={<ItemPage />} />
         </Routes>
+
       </div>
     </Provider>
   );

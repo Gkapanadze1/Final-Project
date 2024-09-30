@@ -8,7 +8,7 @@ import MoreClothes from "../components/MoreClothes";
 import Footer from "../components/Footer";
 
 
-const Homepage = () => {
+const HomePage = () => {
 
 
     return(
@@ -24,4 +24,4 @@ const Homepage = () => {
     )
 }
 
-export default Homepage
+export default HomePage

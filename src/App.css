@@ -30,3 +30,11 @@
 .footer-border{
     border-top: solid 1px gray;
 }
+
+.height{
+    height: 550px;
+}
+
+.width{
+    width: 550px;
+}

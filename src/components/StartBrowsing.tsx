@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const StartBrowsing = () => {
 
@@ -11,7 +12,7 @@ const StartBrowsing = () => {
                         <span className="text-gray-500 font-medium">Step into a world of style and explore our diverse collection of <br /> clothing categories.</span>
                     </div>
 
-                    <button className="secondary flex text-white items-center px-10 py-3 rounded-md gap-3 mt-9">Start Browsing <img src="/images/Right_Arrow.png" alt="RightArrow" /></button>
+                    <Link to='categories'><button className="secondary flex text-white items-center px-10 py-3 rounded-md gap-3 mt-9">Start Browsing <img src="/images/Right_Arrow.png" alt="RightArrow" /></button></Link>
 
                 </div>
 

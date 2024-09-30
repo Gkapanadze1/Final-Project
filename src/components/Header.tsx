@@ -1,20 +1,21 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     return(
         <header className="flex items-center justify-between py-5 max-w-7xl m-auto">
             <div className="flex items-center gap-2 font-semibold text-xl">
-              <a href="/"><img src="/images/Logomark.png" alt="logo"/></a>
+              <Link to="/"><img src="/images/Logomark.png" alt="logo"/></Link>
               <h2 className="font-bold text-secondary">Ecommerce</h2>
             </div>
 
-            <div className="flex items-center gap-9 text-gray-500 text-base font-medium">
-                <a href="/">Home</a>
-                <a href="/">Categories</a>
-                <a href="/">About</a>
-                <a href="/">Contact</a>
-            </div>
+            <nav className="flex items-center gap-9 text-gray-500 text-base font-medium">
+                <Link to="/">Home</Link>
+                <Link to="/categories">Categories</Link>
+                <Link to="/">About</Link>
+                <Link to="/">Contact</Link>
+            </nav>
 
             <div className="flex items-center gap-7">
 
