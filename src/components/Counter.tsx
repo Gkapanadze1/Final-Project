@@ -10,7 +10,7 @@ export function Counter() {
   return (
     <div>
       <div className='flex justify-between items-center'>
-        <button aria-label="Increment value" onClick={() => dispatch(decrement())} className='text-4xl text-gray-500 font-semibold'>-</button>
+        <button aria-label="Increment value" onClick={() => dispatch(decrement())} disabled={count == 1} className='text-4xl text-gray-500 font-semibold'>-</button>
         <span className='text-2xl text-gray-500 font-semibold'>{count}</span>
         <button aria-label="Decrement value" onClick={() => dispatch(increment())} className='text-4xl text-gray-500 font-semibold'>+</button>
       </div>
