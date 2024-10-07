@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DiscountBanner from "../components/DiscountBanner";
 import Header from "../components/Header";
 import { Clothes } from "../components/Clothes";
 import {Counter} from "../components/Counter"
 import { useState } from "react";
+import { Link } from 'react-router-dom';
+import Footer from "../components/Footer";
+import { useLocation } from 'react-router-dom';
 
 const ItemPage = () => {
     const { id } = useParams<{ id: string }>();
     const [activeTab, setActiveTab] = useState("details");
+    const location = useLocation();
+    const { pathname } = location;
+    
+
+    useEffect(()=> {
+        window.scrollTo(0, 0)
+    },[pathname])
 
     if (!id) {
         return <span>Item not found</span>;
@@ -149,6 +159,32 @@ const ItemPage = () => {
                     </div>
                     
                 </div>
+
+                <div className="mt-8 max-w-7xl m-auto">
+                    <div className="flex flex-col gap-3">
+                        <h2 className="text-secondary font-bold text-2xl">You might also like</h2>
+                        <span className="text-gray-400 font-semibold text-sm">SIMILAR PRODUCTS</span>
+                    </div>
+                    <div className="grid grid-cols-4 justify-between mt-24">
+                        {Clothes.slice(2, 6).map((clothes) => (
+                        <Link to={`/items/${clothes.id}`}>
+                        <div key={clothes.id} className="flex flex-col gap-2 items-start">
+                            <img src={clothes.image} alt={clothes.name} className="bg-gray-100 w-72" />
+                            <span className="font-medium text-secondary">{clothes.name}</span>
+                        <div className="flex gap-3 items-center">
+                            <span className={`text-secondary font-medium border border-gray-300 px-3 py-1 rounded-3xl ${clothes.instock ? 'bg-green-100' : 'bg-red-100'}`}>
+                            {clothes.instock ? 'IN STOCK' : 'OUT OF STOCK'}</span>
+                            <span className="text-gray-400 font-normal">${clothes.price}</span>
+                        </div>
+                        </div>
+                        </Link>
+                        ))}
+                    </div>
+
+                </div>
+
+                <Footer />
+
         </div>
     );
 };
