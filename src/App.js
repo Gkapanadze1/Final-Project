@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import { store } from './store/store'
 import { Provider } from 'react-redux'
-import HomePage from './pages/HomePage'
+import HomePage from './pages/Homepage'
 import CategoriesPage from './pages/CategoriesPage'
 import ItemPage from './pages/ItemPage'
 

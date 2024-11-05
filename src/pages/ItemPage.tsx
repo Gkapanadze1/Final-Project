@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DiscountBanner from "../components/DiscountBanner";
+import DiscountBanner from "../components/Discountbanner";
 import Header from "../components/Header";
 import { Clothes } from "../components/Clothes";
 import {Counter} from "../components/Counter"
@@ -14,6 +14,9 @@ const ItemPage = () => {
     const [activeTab, setActiveTab] = useState("details");
     const location = useLocation();
     const { pathname } = location;
+    const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+
     
 
     useEffect(()=> {
@@ -52,13 +55,18 @@ const ItemPage = () => {
                     <span className="text-secondary font-bold text-2xl">${item.price}</span>
                     <div className="flex flex-col gap-2">
                         <span className="text-gray-400 font-semibold">SELECT SIZE</span>
-                        <div className="flex gap-3">
-                            <button className="px-4 py-2 border border-gray-300 rounded-lg">S</button>
-                            <button className="px-3 py-2 border border-gray-300 rounded-lg">M</button>
-                            <button className="px-4 py-2 border border-gray-300 rounded-lg">X</button>
-                            <button className="px-3 py-2 border border-gray-300 rounded-lg">XL</button>
-                            <button className="px-2 py-2 border border-gray-300 rounded-lg">XLL</button>
-                        </div>
+                        <div className="flex gap-2 mt-4">
+                        {sizes.map((size) => (
+                          <button
+                            key={size}
+                            onClick={() => setSelectedSize(size)}
+                            className={`w-10 h-10 rounded-md border transition duration-150 ${
+                            selectedSize === size ? 'border-black' : 'border-gray-200'
+                            }`}>
+                                {size}
+                              </button>
+                            ))}
+                      </div>
                     </div>
                     <div className="flex flex-col gap-2">
                         <span className="text-gray-400 font-semibold">QUANTITY</span>
@@ -76,7 +84,7 @@ const ItemPage = () => {
 
                     <div className="flex flex-col gap-3">
                         <button className={`flex max-w-80 items-center text-secondary font-semibold ${activeTab === "details" ? 'bg-gray-100' : ''} py-2 pr-40 pl-4 rounded-md gap-3`}onClick={() => setActiveTab("details")}><img src="/images/More.png" alt="3Dots" /> Details</button>
-                        <button className={`flex max-w-80 items-center text-secondary font-semibold ${activeTab === "reviews" ? 'bg-gray-100' : ''} py-2 pr-40 pl-4 rounded-md gap-3`}onClick={() => setActiveTab("reviews")}><img src="/images/Empty_Star.png" alt="EmptyStar" /> Reviews</button>
+                        <button className={`flex max-w-80 items-center text-secondary font-semibold ${activeTab === "reviews" ? 'bg-gray-100' : ''} py-2 pr-40 pl-4 rounded-md gap-3`}onClick={() => setActiveTab("reviews")}><img src="/images/Empty_Star.png"/> Reviews</button>
                     </div>
 
                     <div>
@@ -111,7 +119,7 @@ const ItemPage = () => {
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
-                                                <img src="/images/Empty_star.png" alt="EmptyStar" />
+                                                <img src="/images/Empty_Star.png" alt="Empty_Star" />
                                             </div>
                                         </div>
                                         <span className="text-sm text-gray-400">1 WEEK AGO</span>
@@ -127,7 +135,7 @@ const ItemPage = () => {
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
-                                                <img src="/images/Empty_star.png" alt="EmptyStar" />
+                                                <img src="/images/Empty_Star.png" alt="Empty_Star" />
                                             </div>
                                         </div>
                                         <span className="text-sm text-gray-400">2 MONTHS AGO</span>
@@ -143,7 +151,7 @@ const ItemPage = () => {
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
                                                 <img src="/images/Star.png" alt="Star" className="object-scale-down"/>
-                                                <img src="/images/Empty_star.png" alt="EmptyStar" />
+                                                <img src="/images/Empty_Star.png" alt="Empty_Star" />
                                             </div>
                                         </div>
                                         <span className="text-sm text-gray-400">23 APRIL</span>

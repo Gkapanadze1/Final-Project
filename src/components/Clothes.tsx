@@ -58,5 +58,12 @@ export const Clothes: ClothesInterface[] = [
     image: '/images/Clothes_8.png',
     instock: true,
   },
+  {
+    id: 9,
+    name: 'Athletic Shirt',
+    price: '35.00',
+    image: '/images/T-Shirt5.png',
+    instock: false,
+  }
 ];
 export default Clothes

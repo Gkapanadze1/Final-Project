@@ -1,5 +1,5 @@
 import React from "react";
-import DiscountBanner from '../components/DiscountBanner';
+import DiscountBanner from '../components/Discountbanner';
 import Header from '../components/Header';
 import FreshArrivals from "../components/FreshArrivals";
 import BestSeller from "../components/BestSeller";
