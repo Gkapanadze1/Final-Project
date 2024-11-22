@@ -1,6 +1,6 @@
 export interface ClothesInterface {
     id: number,
-    name: string,
+    title: string,
     price: string,
     image: string,
     instock: boolean

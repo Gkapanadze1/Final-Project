@@ -3,11 +3,14 @@ import { useParams } from "react-router-dom";
 import DiscountBanner from "../components/Discountbanner";
 import Header from "../components/Header";
 import { Clothes } from "../components/Clothes";
-import {Counter} from "../components/Counter"
+import { Counter } from "../components/Counter"
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import Footer from "../components/Footer";
 import { useLocation } from 'react-router-dom';
+import { ProductApi } from '../interfaces/Api_interface';
+import { ClothesInterface } from "../interfaces/Clothes_interface";
+import { title } from "process";
 
 const ItemPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -17,7 +20,41 @@ const ItemPage = () => {
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
+    const [products, setProducts] = useState<(ClothesInterface | ProductApi)[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const response = await fetch("https://fakestoreapi.com/products");
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const apiProducts: ProductApi[] = await response.json();
     
+            const transformedApiProducts = apiProducts.map((product) => ({
+              id: product.id,
+              title: product.title,
+              price: product.price.toString(),
+              image: product.image,
+              instock: true,
+            }));
+    
+            setProducts([...Clothes, ...transformedApiProducts]);
+          } catch (error: any) {
+            console.error("Error fetching products:", error);
+            setError(error.message);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
+
+      
+
 
     useEffect(()=> {
         window.scrollTo(0, 0)
@@ -27,7 +64,7 @@ const ItemPage = () => {
         return <span>Item not found</span>;
     }
 
-    const item = Clothes.find(clothes => clothes.id === parseInt(id));
+    const item = products.find(products => products.id === parseInt(id));
 
     if (!item) {
         return <div>Item not found</div>;
@@ -40,16 +77,16 @@ const ItemPage = () => {
 
             <div className="flex max-w-7xl m-auto gap-28 height mt-16">
 
-                <img src={item.image} alt={item.name} className="bg-gray-100 rounded-md h-full object-contain width" />
+                <img src={item.image} alt={item.title} className="bg-gray-100 rounded-md h-full object-contain width" />
                 <div className="flex flex-col gap-10">
                     <div className="flex flex-col gap-2">
                         <div className="flex items-center gap-40">
-                            <span className="text-secondary font-bold text-3xl">{item.name}</span>
+                            <span className="text-secondary font-bold text-3xl">{item.title}</span>
                             <img src="/images/Share.png" alt="Share" />
                         </div>
                         <div className="flex gap-3">
                             <img src="/images/Badge.png" alt="Badge" className="object-scale-down" />
-                            <span className={`text-secondary font-medium border border-gray-300 px-3 py-1 rounded-3xl ${item.instock ? 'bg-green-100' : 'bg-red-100'}`}>{item.instock ? 'IN STOCK' : 'OUT OF STOCK'}</span>
+                            {/* <span className={`text-secondary font-medium border border-gray-300 px-3 py-1 rounded-3xl ${item.instock ? 'bg-green-100' : 'bg-red-100'}`}>{item.instock ? 'IN STOCK' : 'OUT OF STOCK'}</span> */}
                         </div>
                     </div>
                     <span className="text-secondary font-bold text-2xl">${item.price}</span>
@@ -177,8 +214,8 @@ const ItemPage = () => {
                         {Clothes.slice(2, 6).map((clothes) => (
                         <Link to={`/items/${clothes.id}`}>
                         <div key={clothes.id} className="flex flex-col gap-2 items-start">
-                            <img src={clothes.image} alt={clothes.name} className="bg-gray-100 w-72" />
-                            <span className="font-medium text-secondary">{clothes.name}</span>
+                            <img src={clothes.image} alt={clothes.title} className="bg-gray-100 w-72" />
+                            <span className="font-medium text-secondary">{clothes.title}</span>
                         <div className="flex gap-3 items-center">
                             <span className={`text-secondary font-medium border border-gray-300 px-3 py-1 rounded-3xl ${clothes.instock ? 'bg-green-100' : 'bg-red-100'}`}>
                             {clothes.instock ? 'IN STOCK' : 'OUT OF STOCK'}</span>
@@ -188,7 +225,6 @@ const ItemPage = () => {
                         </Link>
                         ))}
                     </div>
-
                 </div>
 
                 <Footer />
