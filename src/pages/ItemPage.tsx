@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import DiscountBanner from "../components/Discountbanner";
 import Header from "../components/Header";
 import { Clothes } from "../components/Clothes";
-import { Counter } from "../components/Counter"
+import { Counter } from "../components/Counter";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import Footer from "../components/Footer";
 import { useLocation } from 'react-router-dom';
 import { ProductApi } from '../interfaces/Api_interface';
 import { ClothesInterface } from "../interfaces/Clothes_interface";
-import { title } from "process";
+import { useNavigate } from "react-router-dom";
 
 const ItemPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -19,10 +19,10 @@ const ItemPage = () => {
     const { pathname } = location;
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+    const navigate = useNavigate();
 
     const [products, setProducts] = useState<(ClothesInterface | ProductApi)[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -44,7 +44,6 @@ const ItemPage = () => {
             setProducts([...Clothes, ...transformedApiProducts]);
           } catch (error: any) {
             console.error("Error fetching products:", error);
-            setError(error.message);
           } finally {
             setLoading(false);
           }
@@ -60,6 +59,10 @@ const ItemPage = () => {
         window.scrollTo(0, 0)
     },[pathname])
 
+    if (loading) {
+        return <div>Loading Product ...</div>;
+    }
+
     if (!id) {
         return <span>Item not found</span>;
     }
@@ -69,6 +72,40 @@ const ItemPage = () => {
     if (!item) {
         return <div>Item not found</div>;
     }
+
+    const handleAddToCart = () => {
+        if (!selectedSize) {
+            alert("Please select a size before adding to the cart.");
+            return;
+        } else {
+            navigate('/cart');
+        }
+    
+        const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    
+        const existingItemIndex = existingCart.findIndex(
+            (cartItem: any) => cartItem.id === item.id && cartItem.size === selectedSize
+        );
+    
+        if (existingItemIndex !== -1) {
+
+            existingCart[existingItemIndex].quantity += 1;
+        } else {
+
+            const cartItem = {
+                id: item.id,
+                title: item.title,
+                price: item.price,
+                image: item.image,
+                size: selectedSize,
+                quantity: 1,
+            };
+            existingCart.push(cartItem);
+        }
+    
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+    };
+    
 
     return (
         <div>
@@ -110,7 +147,7 @@ const ItemPage = () => {
                         <div className="border border-gray-300 max-w-48 py-1 px-3 rounded-md "><Counter /></div>
                     </div>
                     <div className="flex items-center gap-5">
-                        <button className="secondary text-white rounded-md py-3 px-24">Add to cart</button>
+                    <button className="secondary text-white rounded-md py-3 px-24" onClick={handleAddToCart}>Add to cart</button>
                         <button><img src="/images/Heart.png" alt="Heart" className="h-11" /></button>
                     </div>
                     <span className="text-gray-500 font-semibold">— Free shipping on orders $100+</span>

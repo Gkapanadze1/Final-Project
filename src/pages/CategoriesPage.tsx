@@ -5,11 +5,16 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { ProductApi } from "../interfaces/Api_interface";
+import { Clothes } from "../components/Clothes";
+import { ClothesInterface } from "../interfaces/Clothes_interface";
 
 const CategoriesPage = () => {
-    const [products, setProducts] = useState<ProductApi[]>([]);
+    const [products, setProducts] = useState<(ClothesInterface | ProductApi)[]>([]);
     const location = useLocation();
     const { pathname } = location;
+
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const sizes = ["S", "M", "L", "XL", "XXL"];
@@ -39,17 +44,36 @@ const CategoriesPage = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            try {
-                const response = await fetch("https://fakestoreapi.com/products");
-                const data: ProductApi[] = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
+          try {
+            const response = await fetch("https://fakestoreapi.com/products");
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            const apiProducts: ProductApi[] = await response.json();
+    
+            const transformedApiProducts = apiProducts.map((product) => ({
+              id: product.id,
+              title: product.title,
+              price: product.price.toString(),
+              image: product.image,
+              instock: true,
+            }));
+    
+            setProducts([...Clothes, ...transformedApiProducts]);
+          } catch (error: any) {
+            console.error("Error fetching products:", error);
+            setError(error.message);
+          } finally {
+            setLoading(false);
+          }
         };
-
+    
         fetchProducts();
-    }, []);
+      }, []);
+
+      if (loading) {
+        return <div>Loading Products ...</div>;
+    }
 
     return (
         <div>

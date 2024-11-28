@@ -13,8 +13,8 @@ const Header = () => {
             <nav className="flex items-center gap-9 text-gray-500 text-base font-medium">
                 <Link to="/">Home</Link>
                 <Link to="/categories">Categories</Link>
-                <Link to="/">About</Link>
-                <Link to="/">Contact</Link>
+                <Link to="/about">About</Link>
+                <Link to="/contact">Contact</Link>
             </nav>
 
             <div className="flex items-center gap-7">
@@ -25,7 +25,7 @@ const Header = () => {
                 </div>
 
                 <div className="flex items-center gap-7">
-                    <button><img src="/images/Cart_icon.png" alt="CartIcon" /></button>
+                    <Link to="/cart"><img src="/images/Cart_icon.png" alt="CartIcon" /></Link>
                     <button><img src="/images/User_icon.png" alt="UserIcon" /></button>
                 </div>
 
